@@ -87,10 +87,12 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
   while (t != NULL) {
     static char amount_buffer[64];
+    unsigned int amount;
 
     switch (t->key) {
       case KEY_AMOUNT:
-        snprintf(amount_buffer, sizeof(amount_buffer), "£%d", t->value->uint8);
+        amount = t->value->uint32;
+        snprintf(amount_buffer, sizeof(amount_buffer), "£%d.%2d", amount / 100, amount % 100);
         text_layer_set_text(s_paid_amount_layer, amount_buffer);
         break;
     }

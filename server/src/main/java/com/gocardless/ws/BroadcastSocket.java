@@ -39,12 +39,16 @@ public class BroadcastSocket extends WebSocketAdapter {
     }
 
     public static void broadcast(String json) {
-        sessions.forEach(session -> {
-            try {
-                session.getRemote().sendString(json);
-            } catch (IOException e) {
-                LOGGER.error("Error broadcasting message", e);
-            }
-        });
+        sessions.stream()
+                .filter(Session::isOpen)
+                .forEach(session -> broadcast(json, session));
+    }
+
+    private static void broadcast(String json, Session session) {
+        try {
+            session.getRemote().sendString(json);
+        } catch (IOException e) {
+            LOGGER.error("Error broadcasting message", e);
+        }
     }
 }

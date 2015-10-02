@@ -18,6 +18,8 @@ def dependencyVersions = [
 
 dependencies {
     compile group: "io.dropwizard", name: "dropwizard-core", version: dependencyVersions.dropwizard
+
+    testCompile group: "io.dropwizard", name: "dropwizard-testing", version: dependencyVersions.dropwizard
 }
 
 jar {

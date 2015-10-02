@@ -1,0 +1,19 @@
+{
+  "events": [
+    {
+      "id": "EVTESTWZ87HBBF",
+      "created_at": "2015-10-02T13:48:53.219Z",
+      "resource_type": "payments",
+      "action": "created",
+      "links": {
+        "payment": "index_ID_123"
+      },
+      "details": {
+        "origin": "api",
+        "cause": "payment_created",
+        "description": "Payment created via the API."
+      },
+      "metadata": {}
+    }
+  ]
+}

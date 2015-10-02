@@ -1,10 +1,12 @@
 package com.gocardless.api;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class WebhookDetails {
     private final String cause;
 
+    @JsonCreator
     public WebhookDetails(@JsonProperty("cause") String cause) {
         this.cause = cause;
     }

@@ -1,5 +1,6 @@
 package com.gocardless.api;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.ImmutableList;
 
@@ -8,6 +9,7 @@ import java.util.List;
 public class Webhook {
     private final List<WebhookEvent> events;
 
+    @JsonCreator
     public Webhook(@JsonProperty("events") List<WebhookEvent> events) {
         this.events = ImmutableList.copyOf(events);
     }

@@ -27,22 +27,23 @@ static TextLayer *s_paid_amount_layer;
 
 static void wakeup_handler(WakeupId id, int32_t reason) {
   APP_LOG(APP_LOG_LEVEL_INFO, "Woken up!");
+
+  DictionaryIterator *iter;
+  app_message_outbox_begin(&iter);
+  app_message_outbox_send();
+
+  time_t future_time = time(NULL) + 30;
+  wakeup_schedule(future_time, WAKEUP_KEEP_ALIVE, true);
+
   const bool animated = true;
 
   switch (reason) {
-    DictionaryIterator *iter;
-
     case WAKEUP_CLOSE_PAYMENT:
+      APP_LOG(APP_LOG_LEVEL_INFO, "Closing payment window");
       window_stack_pop(animated);
       break;
 
     case WAKEUP_KEEP_ALIVE:
-      app_message_outbox_begin(&iter);
-      app_message_outbox_send();
-
-      time_t future_time = time(NULL) + 30;
-      wakeup_schedule(future_time, WAKEUP_KEEP_ALIVE, true);
-
       break;
   }
 }
@@ -105,6 +106,7 @@ static void paid_window_load(Window *window) {
   layer_add_child(window_get_root_layer(s_paid_window), text_layer_get_layer(s_paid_amount_layer));
 
   time_t future_time = time(NULL) + 10;
+  wakeup_cancel_all();
   wakeup_schedule(future_time, WAKEUP_CLOSE_PAYMENT, true);
 }
 

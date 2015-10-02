@@ -82,6 +82,21 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
   const bool animated = true;
   window_stack_push(s_paid_window, animated);
+
+  Tuple *t = dict_read_first(iterator);
+
+  while (t != NULL) {
+    static char amount_buffer[64];
+
+    switch (t->key) {
+      case KEY_AMOUNT:
+        snprintf(amount_buffer, sizeof(amount_buffer), "£%d", t->value->uint8);
+        text_layer_set_text(s_paid_amount_layer, amount_buffer);
+        break;
+    }
+
+    t = dict_read_next(iterator);
+  }
 }
 
 static void inbox_dropped_callback(AppMessageResult reason, void *context) {

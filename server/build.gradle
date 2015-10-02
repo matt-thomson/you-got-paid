@@ -13,11 +13,13 @@ repositories {
 }
 
 def dependencyVersions = [
-    dropwizard: '0.8.4'
+    dropwizard: '0.8.4',
+    goCardless: '1.7.0'
 ]
 
 dependencies {
     compile group: "io.dropwizard", name: "dropwizard-core", version: dependencyVersions.dropwizard
+    compile group: "com.gocardless", name: "gocardless-pro", version: dependencyVersions.goCardless
 
     testCompile group: "io.dropwizard", name: "dropwizard-testing", version: dependencyVersions.dropwizard
 }

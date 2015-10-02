@@ -1,5 +1,9 @@
 server:
-    type: default
-    applicationConnectors:
-        -   type: http
-            port: ${PORT:-8080}
+  type: default
+  applicationConnectors:
+    - type: http
+      port: ${PORT:-8080}
+
+goCardless:
+  accessToken: ${GC_ACCESS_TOKEN:-}
+  environment: ${GC_ENVIRONMENT:-sandbox}

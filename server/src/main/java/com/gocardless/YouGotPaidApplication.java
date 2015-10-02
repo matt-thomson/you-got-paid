@@ -1,5 +1,6 @@
 package com.gocardless;
 
+import com.gocardless.core.NewPaymentFinder;
 import com.gocardless.resources.WebhookResource;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
@@ -19,7 +20,10 @@ public class YouGotPaidApplication extends Application<YouGotPaidConfiguration> 
 
     @Override
     public void run(YouGotPaidConfiguration configuration, Environment environment) throws Exception {
-        environment.jersey().register(new WebhookResource());
+        GoCardlessClient goCardless = configuration.getGoCardless().buildClient();
+        NewPaymentFinder newPaymentFinder = new NewPaymentFinder(goCardless);
+
+        environment.jersey().register(new WebhookResource(newPaymentFinder));
     }
 
     public static void main(String[] args) throws Exception {

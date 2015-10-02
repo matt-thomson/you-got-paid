@@ -53,7 +53,7 @@ static void paid_window_load(Window *window) {
 
   layer_add_child(window_get_root_layer(s_paid_window), text_layer_get_layer(s_paid_amount_layer));
 
-  time_t future_time = time(NULL) + 5;
+  time_t future_time = time(NULL) + 15;
   wakeup_schedule(future_time, WAKEUP_REASON, true);
 }
 

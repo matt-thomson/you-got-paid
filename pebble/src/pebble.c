@@ -3,11 +3,19 @@
 static Window *s_main_window;
 static TextLayer *s_time_layer;
 
+#if defined(PBL_COLOR)
+  #define BG_COLOR GColorFromHEX(0x55AAFF)
+#else
+  #define BG_COLOR GColorBlack
+#endif
+
+#define TEXT_COLOR GColorWhite
+
 static void main_window_load(Window *window) {
   // Create time TextLayer
   s_time_layer = text_layer_create(GRect(0, 55, 144, 50));
-  text_layer_set_background_color(s_time_layer, GColorClear);
-  text_layer_set_text_color(s_time_layer, GColorBlack);
+  text_layer_set_background_color(s_time_layer, BG_COLOR);
+  text_layer_set_text_color(s_time_layer, TEXT_COLOR);
   text_layer_set_text(s_time_layer, "00:00");
 
   // Improve the layout to be more like a watchface
@@ -46,6 +54,7 @@ static void init(void) {
   });
   const bool animated = true;
   window_stack_push(s_main_window, animated);
+  window_set_background_color(s_main_window, BG_COLOR);
 
   time_t temp = time(NULL);
   struct tm *tick_time = localtime(&temp);

@@ -1,8 +1,8 @@
 {
-  "uuid": "a4159b55-b228-47c7-955b-82f9703562f3",
+  "uuid": "63004266-054c-458e-9b11-c0a6a8d3fdee",
   "shortName": "you-got-paid",
-  "longName": "you-got-paid",
-  "companyName": "MakeAwesomeHappen",
+  "longName": "You Got Paid",
+  "companyName": "GoCardless",
   "versionLabel": "1.0",
   "sdkVersion": "3",
   "targetPlatforms": ["aplite", "basalt"],

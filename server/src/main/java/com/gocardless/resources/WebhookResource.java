@@ -1,5 +1,6 @@
 package com.gocardless.resources;
 
+import com.gocardless.api.Webhook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,7 +12,7 @@ public class WebhookResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebhookResource.class);
 
     @POST
-    public void handleWebhook(String body) {
-        LOGGER.info("Received webhook: {}", body);
+    public void handleWebhook(Webhook webhook) {
+        LOGGER.info("Received webhook: {}", webhook);
     }
 }

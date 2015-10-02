@@ -4,6 +4,7 @@ static Window *s_main_window;
 static TextLayer *s_time_layer;
 
 static Window *s_paid_window;
+static TextLayer *s_you_got_paid_layer;
 static TextLayer *s_paid_amount_layer;
 
 #if defined(PBL_COLOR)
@@ -43,14 +44,20 @@ static void main_window_unload(Window *window) {
 }
 
 static void paid_window_load(Window *window) {
+  s_you_got_paid_layer = text_layer_create(GRect(0, 0, 144, 30));
+  text_layer_set_background_color(s_you_got_paid_layer, COLOR_BG);
+  text_layer_set_text_color(s_you_got_paid_layer, COLOR_TEXT);
+  text_layer_set_text(s_you_got_paid_layer, "You got paid!");
+  text_layer_set_font(s_you_got_paid_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
+  text_layer_set_text_alignment(s_you_got_paid_layer, GTextAlignmentCenter);
+  layer_add_child(window_get_root_layer(s_paid_window), text_layer_get_layer(s_you_got_paid_layer));
+
   s_paid_amount_layer = text_layer_create(GRect(0, 55, 144, 50));
   text_layer_set_background_color(s_paid_amount_layer, COLOR_BG);
   text_layer_set_text_color(s_paid_amount_layer, COLOR_TEXT);
   text_layer_set_text(s_paid_amount_layer, "£££");
-
   text_layer_set_font(s_paid_amount_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_text_alignment(s_paid_amount_layer, GTextAlignmentCenter);
-
   layer_add_child(window_get_root_layer(s_paid_window), text_layer_get_layer(s_paid_amount_layer));
 
   time_t future_time = time(NULL) + 15;
@@ -58,6 +65,7 @@ static void paid_window_load(Window *window) {
 }
 
 static void paid_window_unload(Window *window) {
+  text_layer_destroy(s_you_got_paid_layer);
   text_layer_destroy(s_paid_amount_layer);
 }
 

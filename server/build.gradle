@@ -14,11 +14,13 @@ repositories {
 
 def dependencyVersions = [
     dropwizard: '0.8.4',
+    jetty: '9.2.9.v20150224',
     goCardless: '1.7.0'
 ]
 
 dependencies {
     compile group: "io.dropwizard", name: "dropwizard-core", version: dependencyVersions.dropwizard
+    compile group: "org.eclipse.jetty.websocket", name: "websocket-server", version: dependencyVersions.jetty
     compile group: "com.gocardless", name: "gocardless-pro", version: dependencyVersions.goCardless
 
     testCompile group: "io.dropwizard", name: "dropwizard-testing", version: dependencyVersions.dropwizard

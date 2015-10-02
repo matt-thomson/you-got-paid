@@ -15,8 +15,9 @@ static TextLayer *s_paid_amount_layer;
 
 #define COLOR_TEXT GColorWhite
 
-#define KEY_AMOUNT 0
-#define KEY_PAYER  1
+#define KEY_AMOUNT      0
+#define KEY_GIVEN_NAME  1
+#define KEY_FAMLIY_NAME 2
 
 #define WAKEUP_REASON 0
 

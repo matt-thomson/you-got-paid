@@ -14,7 +14,7 @@ public class NewPaymentTest {
 
     @Test
     public void shouldSerializeNewPayment() throws IOException {
-        NewPayment newPayment = new NewPayment(123, "Tom Jones");
+        NewPayment newPayment = new NewPayment(123, "Tom", "Jones");
         String expected = MAPPER.writeValueAsString(MAPPER.readValue(fixture("fixtures/new_payment.json"), NewPayment.class));
 
         assertThat(MAPPER.writeValueAsString(newPayment)).isEqualTo(expected);

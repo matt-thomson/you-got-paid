@@ -6,7 +6,8 @@ ws.onmessage = function (event) {
 
   var dict = {
     'KEY_AMOUNT': payment.amount,
-    'KEY_PAYER': payment.name
+    'KEY_GIVEN_NAME': payment.given_name,
+    'KEY_FAMILY_NAME': payment.family_name
   };
 
   Pebble.sendAppMessage(dict,
@@ -23,5 +24,21 @@ ws.onmessage = function (event) {
 Pebble.addEventListener('ready',
   function(e) {
     console.log('PebbleKit JS ready!');
+
+
+    var dict = {
+      'KEY_AMOUNT': 123,
+      'KEY_GIVEN_NAME': "Tom",
+      'KEY_FAMILY_NAME': "Jones"
+    };
+
+    Pebble.sendAppMessage(dict,
+      function(e) {
+        console.log('Send successful.');
+      },
+      function(e) {
+        console.log('Send failed!');
+      }
+    );
   }
 );

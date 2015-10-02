@@ -46,7 +46,7 @@ public class BroadcastSocket extends WebSocketAdapter {
 
     private static void broadcast(String json, Session session) {
         LOGGER.info("Broadcasting to [{}]", session.getRemoteAddress());
-        
+
         try {
             session.getRemote().sendString(json);
         } catch (IOException e) {

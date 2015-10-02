@@ -11,7 +11,8 @@
   },
   "appKeys": {
     "KEY_AMOUNT": 0,
-    "KEY_PAYER": 1
+    "KEY_GIVEN_NAME": 1,
+    "KEY_FAMILY_NAME": 2
   },
   "resources": {
     "media": []

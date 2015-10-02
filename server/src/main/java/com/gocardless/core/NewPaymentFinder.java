@@ -31,7 +31,6 @@ public class NewPaymentFinder {
         CustomerBankAccount bankAccount = goCardless.customerBankAccounts().get(mandate.getLinks().getCustomerBankAccount()).execute();
         Customer customer = goCardless.customers().get(bankAccount.getLinks().getCustomer()).execute();
 
-        String customerName = String.format("%s %s", customer.getGivenName(), customer.getFamilyName());
-        return new NewPayment(payment.getAmount(), customerName);
+        return new NewPayment(payment.getAmount(), customer.getGivenName(), customer.getFamilyName());
     }
 }

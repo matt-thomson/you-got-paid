@@ -1,4 +1,5 @@
 {
   "amount": 123,
-  "name": "Tom Jones"
+  "given_name": "Tom",
+  "family_name": "Jones"
 }

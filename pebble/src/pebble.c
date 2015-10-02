@@ -22,13 +22,29 @@ static TextLayer *s_paid_amount_layer;
 #define KEY_GIVEN_NAME  1
 #define KEY_FAMILY_NAME 2
 
-#define WAKEUP_REASON 0
+#define WAKEUP_CLOSE_PAYMENT 0
+#define WAKEUP_KEEP_ALIVE    1
 
 static void wakeup_handler(WakeupId id, int32_t reason) {
   APP_LOG(APP_LOG_LEVEL_INFO, "Woken up!");
-
   const bool animated = true;
-  window_stack_pop(animated);
+
+  switch (reason) {
+    DictionaryIterator *iter;
+
+    case WAKEUP_CLOSE_PAYMENT:
+      window_stack_pop(animated);
+      break;
+
+    case WAKEUP_KEEP_ALIVE:
+      app_message_outbox_begin(&iter);
+      app_message_outbox_send();
+
+      time_t future_time = time(NULL) + 30;
+      wakeup_schedule(future_time, WAKEUP_KEEP_ALIVE, true);
+
+      break;
+  }
 }
 
 static void main_window_load(Window *window) {
@@ -89,7 +105,7 @@ static void paid_window_load(Window *window) {
   layer_add_child(window_get_root_layer(s_paid_window), text_layer_get_layer(s_paid_amount_layer));
 
   time_t future_time = time(NULL) + 10;
-  wakeup_schedule(future_time, WAKEUP_REASON, true);
+  wakeup_schedule(future_time, WAKEUP_CLOSE_PAYMENT, true);
 }
 
 static void paid_window_unload(Window *window) {
@@ -199,11 +215,16 @@ static void init(void) {
   update_time(tick_time);
 
   tick_timer_service_subscribe(MINUTE_UNIT, tick_handler);
+
+  time_t future_time = time(NULL) + 30;
+  wakeup_schedule(future_time, WAKEUP_KEEP_ALIVE, true);
 }
 
 static void deinit(void) {
   window_destroy(s_main_window);
   window_destroy(s_paid_window);
+
+  wakeup_cancel_all();
 }
 
 int main(void) {

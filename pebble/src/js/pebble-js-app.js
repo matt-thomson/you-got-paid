@@ -26,3 +26,11 @@ Pebble.addEventListener('ready',
     console.log('PebbleKit JS ready!');
   }
 );
+
+Pebble.addEventListener('appmessage',
+  function(e) {
+    console.log('AppMessage received!');
+
+    ws.send('ping');
+  }
+);

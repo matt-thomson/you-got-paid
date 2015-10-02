@@ -24,21 +24,5 @@ ws.onmessage = function (event) {
 Pebble.addEventListener('ready',
   function(e) {
     console.log('PebbleKit JS ready!');
-
-
-    var dict = {
-      'KEY_AMOUNT': 123,
-      'KEY_GIVEN_NAME': "Tom",
-      'KEY_FAMILY_NAME': "Jones"
-    };
-
-    Pebble.sendAppMessage(dict,
-      function(e) {
-        console.log('Send successful.');
-      },
-      function(e) {
-        console.log('Send failed!');
-      }
-    );
   }
 );

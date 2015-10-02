@@ -82,6 +82,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
   const bool animated = true;
   window_stack_push(s_paid_window, animated);
+  vibes_short_pulse();
 
   Tuple *t = dict_read_first(iterator);
 
